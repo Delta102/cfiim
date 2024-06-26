@@ -11,17 +11,11 @@
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="256dp"
         android:text="Cerrar Sesión"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.669"
-=======
-        android:text="Cerrar Sesión"
-        app:layout_constraintEnd_toEndOf="parent"
->>>>>>> 475d4251c30d8f8b845c9c05b82716f2f8f01c7c
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -35,7 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_logout"
         app:srcCompat="@drawable/background" />
-<<<<<<< HEAD
 
     <TextView
         android:id="@+id/txt_user"
@@ -53,6 +46,4 @@
         app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-=======
->>>>>>> 475d4251c30d8f8b845c9c05b82716f2f8f01c7c
 </androidx.constraintlayout.widget.ConstraintLayout>
