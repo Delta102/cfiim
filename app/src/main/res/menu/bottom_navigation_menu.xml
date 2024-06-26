@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_main"
+        android:icon="@drawable/ic_home"
+        android:title="Main" />
+    <item
+        android:id="@+id/navigation_courses"
+        android:icon="@drawable/ic_courses"
+        android:title="Cursos" />
+    <!-- Agrega más items según tus necesidades -->
+</menu>
