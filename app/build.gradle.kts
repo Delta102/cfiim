@@ -29,8 +29,13 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
     implementation(libs.jwtdecode)
     implementation ("com.google.android.material:material:1.4.0")
+=======
+
+    implementation(libs.jwtdecode)
+>>>>>>> 475d4251c30d8f8b845c9c05b82716f2f8f01c7c
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
