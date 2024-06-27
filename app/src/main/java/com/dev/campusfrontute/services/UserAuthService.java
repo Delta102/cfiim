@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface ApiService {
+public interface UserAuthService {
     @POST("Auth/login")
     Call<MdlUser> loginUser(@Body LoginRequest request);
     @GET("Auth/profile")

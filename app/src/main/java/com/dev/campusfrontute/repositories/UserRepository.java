@@ -7,10 +7,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.dev.campusfrontute.models.MdlUser;
 import com.dev.campusfrontute.models.helpers.MdlUserWithRole;
 import com.dev.campusfrontute.network.RetrofitClient;
-import com.dev.campusfrontute.services.ApiService;
+import com.dev.campusfrontute.services.UserAuthService;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -18,13 +17,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository {
-    private ApiService apiService;
+    private UserAuthService userAuthService;
     private static final String SHARED_PREFS = "shared_prefs";
     private static final String TAG = "UserRepository";
     private SharedPreferences sharedPreferences;
 
     public UserRepository(Context context) {
-        apiService = RetrofitClient.getClient().create(ApiService.class);
+        userAuthService = RetrofitClient.getClient().create(UserAuthService.class);
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
     }
 
@@ -34,7 +33,7 @@ public class UserRepository {
 
         if (token != null) {
             String authHeader = "Bearer " + token;
-            apiService.getLoggedUser(authHeader).enqueue(new Callback<MdlUserWithRole>() {
+            userAuthService.getLoggedUser(authHeader).enqueue(new Callback<MdlUserWithRole>() {
                 @Override
                 public void onResponse(Call<MdlUserWithRole> call, Response<MdlUserWithRole> response) {
                     if (response.isSuccessful()) {

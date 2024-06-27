@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev.campusfrontute.models.helpers.LoginRequest;
 import com.dev.campusfrontute.models.MdlUser;
-import com.dev.campusfrontute.services.ApiService;
+import com.dev.campusfrontute.services.UserAuthService;
 import com.dev.campusfrontute.network.RetrofitClient;
 
 import retrofit2.Call;
@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private ApiService apiService;
+    private UserAuthService userAuthService;
     private static final String SHARED_PREFS = "shared_prefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +50,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String userName, String password) {
         // Retrofit Init
-        apiService = RetrofitClient.getClient().create(ApiService.class);
+        userAuthService = RetrofitClient.getClient().create(UserAuthService.class);
 
         // Call to Api
         LoginRequest request = new LoginRequest(userName, password);
-        apiService.loginUser(request).enqueue(new Callback<MdlUser>() {
+        userAuthService.loginUser(request).enqueue(new Callback<MdlUser>() {
             @Override
             public void onResponse(Call<MdlUser> call, Response<MdlUser> response) {
                 if (response.isSuccessful()) {
