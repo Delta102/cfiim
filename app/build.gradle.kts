@@ -30,6 +30,7 @@ android {
 
 dependencies {
 
+    implementation("com.squareup.picasso:picasso:2.8")
     implementation ("com.google.android.material:material:1.4.0")
     implementation(libs.jwtdecode)
     implementation("com.squareup.okhttp3:okhttp:4.9.3")

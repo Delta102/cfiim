@@ -6,6 +6,7 @@ public class MdlUserWithRole {
     private MdlUser user;
     private int roleId;
     private String roleName;
+    private String pictureUrl;
 
     public MdlUser getUser() {
         return user;
@@ -30,4 +31,13 @@ public class MdlUserWithRole {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 }
+
