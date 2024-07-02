@@ -1,9 +1,12 @@
 package com.dev.campusfrontute.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     private List<MdlCourse> courseList;
     private Context context;
+    private Boolean isExpanded = false;
 
     public CourseAdapter(List<MdlCourse> courseList, Context context) {
         this.courseList = courseList;
@@ -37,9 +41,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         MdlCourse course = courseList.get(position);
 
-        // Aquí vinculas los datos del curso con los elementos visuales del ViewHolder
+        // Visual Elements
         holder.txtCourseName.setText(course.getFullname());
         holder.txtCourseDescription.setText(course.getShortname());
+
+
     }
 
     @Override
@@ -53,8 +59,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtCourseName = itemView.findViewById(R.id.courseTextView);
-            txtCourseDescription = itemView.findViewById(R.id.shortNameTxtView);
+            txtCourseName = itemView.findViewById(R.id.course_name);
+            txtCourseDescription = itemView.findViewById(R.id.course_shortname);
         }
     }
 }

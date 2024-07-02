@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private CourseRepository coursesRepository;
     private RecyclerView recyclerView;
     private CourseAdapter courseAdapter;
+    private boolean isExpanded = false;
     private static final String TAG = "MainActivity";
 
     @Override
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         usersRepository = new UserRepository(this);
         coursesRepository = new CourseRepository(this);
+
+        LinearLayout llCourses = findViewById(R.layout.item_course);
 
         setupLogoutButton();
         observeLoggedUser();
@@ -90,12 +94,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "displayUserInfo: " + mdlUserWithRole.getPictureUrl());
             loadImageProfile(mdlUserWithRole.getPictureUrl(), imgProfilePicture);
         }
-        else{
+        else
             imgProfilePicture.setImageResource(R.drawable.userblankprofile);
-        }
-
-
-
 
 
         TextView txtName = findViewById(R.id.txt_user);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadImageProfile(String url, ImageView imgProfilePicture) {
         Picasso.get()
-                .load(R.drawable.background)
+                .load(url)
                 .fit()
                 .centerCrop()
                 .placeholder(R.drawable.userblankprofile)

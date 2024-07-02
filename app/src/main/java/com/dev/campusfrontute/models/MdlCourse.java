@@ -42,11 +42,12 @@ public class MdlCourse {
     private Long originalcourseid;
     private boolean showactivitydates;
     private Boolean showcompletionconditions;
+    private boolean expanded;
 
     // Constructor's
     public MdlCourse(){}
 
-    public MdlCourse(long id, long category, long sortorder, String fullname, String shortname, String idnumber, Integer plan, String codcourse, Integer section, String naturaleza, String horario, String summary, byte summaryformat, String format, byte showgrades, int newsitems, long startdate, long enddate, boolean relativedatesmode, long marker, long maxbytes, short legacyfiles, short showreports, Boolean visible, Boolean visibleold, Boolean downloadcontent, short groupmode, short groupmodeforce, long defaultgroupingid, String lang, String calendartype, String theme, long timecreated, long timemodified, boolean requested, boolean enablecompletion, boolean completionnotify, long cacherev, Long originalcourseid, boolean showactivitydates, Boolean showcompletionconditions) {
+    public MdlCourse(long id, long category, long sortorder, String fullname, String shortname, String idnumber, Integer plan, String codcourse, Integer section, String naturaleza, String horario, String summary, byte summaryformat, String format, byte showgrades, int newsitems, long startdate, long enddate, boolean relativedatesmode, long marker, long maxbytes, short legacyfiles, short showreports, Boolean visible, Boolean visibleold, Boolean downloadcontent, short groupmode, short groupmodeforce, long defaultgroupingid, String lang, String calendartype, String theme, long timecreated, long timemodified, boolean requested, boolean enablecompletion, boolean completionnotify, long cacherev, Long originalcourseid, boolean showactivitydates, Boolean showcompletionconditions, boolean expanded) {
         this.id = id;
         this.category = category;
         this.sortorder = sortorder;
@@ -88,6 +89,7 @@ public class MdlCourse {
         this.originalcourseid = originalcourseid;
         this.showactivitydates = showactivitydates;
         this.showcompletionconditions = showcompletionconditions;
+        this.expanded = expanded;
     }
 
 
@@ -419,5 +421,13 @@ public class MdlCourse {
 
     public void setShowcompletionconditions(Boolean showcompletionconditions) {
         this.showcompletionconditions = showcompletionconditions;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 }
