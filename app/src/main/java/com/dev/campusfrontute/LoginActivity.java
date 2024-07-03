@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String userName, String password) {
         // Retrofit Init
-        userAuthService = RetrofitClient.getClient().create(UserAuthService.class);
+        userAuthService = RetrofitClient.getClient(this).create(UserAuthService.class);
 
         // Call to Api
         LoginRequest request = new LoginRequest(userName, password);

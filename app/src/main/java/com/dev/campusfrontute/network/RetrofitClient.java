@@ -1,4 +1,6 @@
 package com.dev.campusfrontute.network;
+import android.content.Context;
+
 import java.security.cert.CertificateException;
 
 import javax.net.ssl.SSLContext;
@@ -15,18 +17,18 @@ public class RetrofitClient {
     static Retrofit retrofit;
     static final String BASE_URL = "https://10.0.2.2:7072/";
 
-    public static Retrofit getClient() {
+    public static Retrofit getClient(Context context) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(getUnsafeOkHttpClient())
+                    .client(getUnsafeOkHttpClient(context))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    private static OkHttpClient getUnsafeOkHttpClient() {
+    private static OkHttpClient getUnsafeOkHttpClient(Context context) {
         try {
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
@@ -50,6 +52,9 @@ public class RetrofitClient {
             final okhttp3.OkHttpClient.Builder builder = new okhttp3.OkHttpClient.Builder();
             builder.sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustAllCerts[0]);
             builder.hostnameVerifier((hostname, session) -> true);
+
+            // Add the auth interceptor
+            builder.addInterceptor(new AuthInterceptor(context));
 
             // Logging Interceptor
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

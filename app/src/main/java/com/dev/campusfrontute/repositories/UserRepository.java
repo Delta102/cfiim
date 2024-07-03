@@ -23,46 +23,41 @@ public class UserRepository {
     private SharedPreferences sharedPreferences;
 
     public UserRepository(Context context) {
-        userAuthService = RetrofitClient.getClient().create(UserAuthService.class);
+        userAuthService = RetrofitClient.getClient(context).create(UserAuthService.class);
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
     }
 
     public LiveData<MdlUserWithRole> getLoggedUser() {
         MutableLiveData<MdlUserWithRole> userLiveData = new MutableLiveData<>();
-        String token = sharedPreferences.getString("token", null);
 
-        if (token != null) {
-            String authHeader = "Bearer " + token;
-            userAuthService.getLoggedUser(authHeader).enqueue(new Callback<MdlUserWithRole>() {
-                @Override
-                public void onResponse(Call<MdlUserWithRole> call, Response<MdlUserWithRole> response) {
-                    if (response.isSuccessful()) {
-                        MdlUserWithRole userResponse = response.body();
-                        Log.d(TAG, "Respuesta de usuario: " + new Gson().toJson(userResponse));
-                        if (userResponse != null)
-                            userLiveData.setValue(userResponse);
-                        else {
-                            Log.e(TAG, "Respuesta de usuario nula");
-                            userLiveData.setValue(null);
-                        }
-                    } else {
-                        Log.e(TAG, "Error al obtener el perfil del usuario: " + response.message());
+        userAuthService.getLoggedUser().enqueue(new Callback<MdlUserWithRole>() {
+            @Override
+            public void onResponse(Call<MdlUserWithRole> call, Response<MdlUserWithRole> response) {
+                if (response.isSuccessful()) {
+                    MdlUserWithRole userResponse = response.body();
+                    Log.d(TAG, "Respuesta de usuario: " + new Gson().toJson(userResponse));
+                    if (userResponse != null)
+                        userLiveData.setValue(userResponse);
+                    else {
+                        Log.e(TAG, "Respuesta de usuario nula");
                         userLiveData.setValue(null);
                     }
-                }
-
-                @Override
-                public void onFailure(Call<MdlUserWithRole> call, Throwable t) {
-                    Log.e(TAG, "Error al obtener el perfil del usuario: " + t.getMessage());
+                } else {
+                    Log.e(TAG, "Error al obtener el perfil del usuario: " + response.message());
                     userLiveData.setValue(null);
                 }
-            });
-        } else {
-            userLiveData.setValue(null);
-            Log.e(TAG, "Token Nulo");
-        }
+            }
+
+            @Override
+            public void onFailure(Call<MdlUserWithRole> call, Throwable t) {
+                Log.e(TAG, "Error al obtener el perfil del usuario: " + t.getMessage());
+                userLiveData.setValue(null);
+            }
+        });
+
         return userLiveData;
     }
+
 
     /*LOGOUT FUNCTION*/
     public void logout(){

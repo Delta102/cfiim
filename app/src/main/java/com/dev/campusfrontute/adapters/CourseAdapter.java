@@ -1,5 +1,6 @@
 package com.dev.campusfrontute.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +37,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         View itemView = inflater.inflate(R.layout.item_course, parent, false);
         return new CourseViewHolder(itemView);
     }
-
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         MdlCourse course = courseList.get(position);
@@ -44,8 +44,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         // Visual Elements
         holder.txtCourseName.setText(course.getFullname());
         holder.txtCourseDescription.setText(course.getShortname());
-
-
+        holder.txtCourseStatus.setText("Activado: " + course.getId());
     }
 
     @Override
@@ -56,11 +55,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public static class CourseViewHolder extends RecyclerView.ViewHolder {
         TextView txtCourseName;
         TextView txtCourseDescription;
+        TextView txtCourseStatus;
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
             txtCourseName = itemView.findViewById(R.id.course_name);
             txtCourseDescription = itemView.findViewById(R.id.course_shortname);
+            txtCourseStatus = itemView.findViewById(R.id.txtCourseStatus);
         }
     }
 }

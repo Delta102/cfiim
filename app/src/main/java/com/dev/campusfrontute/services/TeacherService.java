@@ -14,5 +14,5 @@ import retrofit2.http.Path;
 
 public interface TeacherService {
     @GET("courses/{teacherId}")
-    Call<List<MdlCourse>> getCoursesByTeacher(@Header("Authorization") String token, @Path("teacherId") long teacherId);
+    Call<List<MdlCourse>> getCoursesByTeacher(@Path("teacherId") long teacherId);
 }

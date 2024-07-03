@@ -28,38 +28,31 @@ public class CourseRepository {
 
     public CourseRepository(Context context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        teacherService = RetrofitClient.getClient().create(TeacherService.class);
+        teacherService = RetrofitClient.getClient(context).create(TeacherService.class);
     }
 
     public LiveData<List<MdlCourse>> getCoursesByTeacherId(long teacherId) {
         MutableLiveData<List<MdlCourse>> courseLiveData = new MutableLiveData<>();
-        String token = sharedPreferences.getString("token", null);
 
-        if (token != null) {
-            String authHeader = "Bearer " + token;
-            teacherService.getCoursesByTeacher(authHeader, teacherId).enqueue(new Callback<List<MdlCourse>>() {
+        teacherService.getCoursesByTeacher(teacherId).enqueue(new Callback<List<MdlCourse>>() {
 
-                @Override
-                public void onResponse(Call<List<MdlCourse>> call, Response<List<MdlCourse>> response) {
-                    if (response.isSuccessful()) {
-                        List<MdlCourse> courses = response.body();
-                        courseLiveData.setValue(courses);
-                    } else {
-                        Log.e(TAG, "Error al obtener los cursos del profesor: " + response.message());
-                        courseLiveData.setValue(null);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<MdlCourse>> call, Throwable t) {
-                    Log.e(TAG, "Error al obtener los cursos del profesor: " + t.getMessage());
+            @Override
+            public void onResponse(Call<List<MdlCourse>> call, Response<List<MdlCourse>> response) {
+                if (response.isSuccessful()) {
+                    List<MdlCourse> courses = response.body();
+                    courseLiveData.setValue(courses);
+                } else {
+                    Log.e(TAG, "Error al obtener los cursos del profesor: " + response.message());
                     courseLiveData.setValue(null);
                 }
-            });
-        } else {
-            courseLiveData.setValue(null);
-            Log.e(TAG, "Token Nulo");
-        }
+            }
+
+            @Override
+            public void onFailure(Call<List<MdlCourse>> call, Throwable t) {
+                Log.e(TAG, "Error al obtener los cursos del profesor: " + t.getMessage());
+                courseLiveData.setValue(null);
+            }
+        });
 
         return courseLiveData;
     }

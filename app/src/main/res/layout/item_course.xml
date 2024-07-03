@@ -27,6 +27,7 @@
             <!-- Course Image -->
             <ImageView
                 android:id="@+id/imgCourse"
+                android:contentDescription="Course Image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"

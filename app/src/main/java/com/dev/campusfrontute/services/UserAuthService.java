@@ -14,5 +14,5 @@ public interface UserAuthService {
     @POST("Auth/login")
     Call<MdlUser> loginUser(@Body LoginRequest request);
     @GET("Auth/profile")
-    Call<MdlUserWithRole> getLoggedUser(@Header("Authorization") String token);
+    Call<MdlUserWithRole> getLoggedUser();
 }
