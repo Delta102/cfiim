@@ -8,11 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.dev.campusfrontute.models.MdlCourse;
-import com.dev.campusfrontute.models.helpers.MdlUserWithRole;
 import com.dev.campusfrontute.network.RetrofitClient;
-import com.dev.campusfrontute.services.TeacherService;
-import com.dev.campusfrontute.services.UserAuthService;
-import com.google.gson.Gson;
+import com.dev.campusfrontute.services.CourseService;
 
 import java.util.List;
 
@@ -21,35 +18,27 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CourseRepository {
-    private TeacherService teacherService;
-    private static final String SHARED_PREFS = "shared_prefs";
+    private CourseService courseService;
     private static final String TAG = "CourseRepository";
     private SharedPreferences sharedPreferences;
 
     public CourseRepository(Context context) {
-        sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        teacherService = RetrofitClient.getClient(context).create(TeacherService.class);
+        courseService = RetrofitClient.getClient(context).create(CourseService.class);
     }
 
-    public LiveData<List<MdlCourse>> getCoursesByTeacherId(long teacherId) {
-        MutableLiveData<List<MdlCourse>> courseLiveData = new MutableLiveData<>();
+    public LiveData<MdlCourse> getCoursesById(long courseId) {
+        MutableLiveData<MdlCourse> courseLiveData = new MutableLiveData<>();
 
-        teacherService.getCoursesByTeacher(teacherId).enqueue(new Callback<List<MdlCourse>>() {
-
+        courseService.getCourseById(courseId).enqueue(new Callback<MdlCourse>() {
             @Override
-            public void onResponse(Call<List<MdlCourse>> call, Response<List<MdlCourse>> response) {
-                if (response.isSuccessful()) {
-                    List<MdlCourse> courses = response.body();
-                    courseLiveData.setValue(courses);
-                } else {
-                    Log.e(TAG, "Error al obtener los cursos del profesor: " + response.message());
-                    courseLiveData.setValue(null);
-                }
+            public void onResponse(Call<MdlCourse> call, Response<MdlCourse> response) {
+                MdlCourse courses = response.body();
+                courseLiveData.setValue(courses);
             }
 
             @Override
-            public void onFailure(Call<List<MdlCourse>> call, Throwable t) {
-                Log.e(TAG, "Error al obtener los cursos del profesor: " + t.getMessage());
+            public void onFailure(Call<MdlCourse> call, Throwable t) {
+                Log.e(TAG, "Error al obtener el curso: " + t.getMessage());
                 courseLiveData.setValue(null);
             }
         });

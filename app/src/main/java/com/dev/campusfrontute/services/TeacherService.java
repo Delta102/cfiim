@@ -13,6 +13,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface TeacherService {
-    @GET("courses/{teacherId}")
+    @GET("Teacher/active/courses/{teacherId}")
     Call<List<MdlCourse>> getCoursesByTeacher(@Path("teacherId") long teacherId);
 }

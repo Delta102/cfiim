@@ -74,7 +74,7 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/edTxtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -91,7 +91,7 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/edTxtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"/>

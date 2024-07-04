@@ -16,13 +16,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserRepository {
+public class AuthRepository {
     private UserAuthService userAuthService;
     private static final String SHARED_PREFS = "shared_prefs";
     private static final String TAG = "UserRepository";
     private SharedPreferences sharedPreferences;
 
-    public UserRepository(Context context) {
+    public AuthRepository(Context context) {
         userAuthService = RetrofitClient.getClient(context).create(UserAuthService.class);
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
     }

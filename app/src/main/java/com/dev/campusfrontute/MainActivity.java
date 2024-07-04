@@ -1,40 +1,34 @@
 package com.dev.campusfrontute;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dev.campusfrontute.adapters.CourseAdapter;
 import com.dev.campusfrontute.models.MdlCourse;
 import com.dev.campusfrontute.models.helpers.MdlUserWithRole;
-import com.dev.campusfrontute.repositories.CourseRepository;
-import com.dev.campusfrontute.repositories.UserRepository;
+import com.dev.campusfrontute.repositories.AuthRepository;
+import com.dev.campusfrontute.repositories.TeacherRepository;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Response;
-
 public class MainActivity extends AppCompatActivity {
 
-    private UserRepository usersRepository;
-    private CourseRepository coursesRepository;
+    private AuthRepository usersRepository;
+    private TeacherRepository teacherRepository;
     private RecyclerView recyclerView;
     private CourseAdapter courseAdapter;
     private boolean isExpanded = false;
@@ -45,17 +39,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usersRepository = new UserRepository(this);
-        coursesRepository = new CourseRepository(this);
-
-        LinearLayout llCourses = findViewById(R.layout.item_course);
+        usersRepository = new AuthRepository(this);
+        teacherRepository = new TeacherRepository(this);
 
         setupLogoutButton();
         observeLoggedUser();
     }
 
     private void setupLogoutButton() {
-        Button btnLogout = findViewById(R.id.btn_logout);
+        Button btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             imgProfilePicture.setImageResource(R.drawable.userblankprofile);
 
 
-        TextView txtName = findViewById(R.id.txt_user);
+        TextView txtName = findViewById(R.id.txtUserName);
 
         String fullFirstName = mdlUserWithRole.getUser().getFirstname().trim();
         String firstName = capitalize(fullFirstName.split(" ")[0]);
@@ -141,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvCourses);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
-        coursesRepository.getCoursesByTeacherId(userId).observe(this, new Observer<List<MdlCourse>>() {
+        teacherRepository.getCoursesByTeacherId(userId).observe(this, new Observer<List<MdlCourse>>() {
             @Override
             public void onChanged(List<MdlCourse> courses) {
                 if (courses != null) {

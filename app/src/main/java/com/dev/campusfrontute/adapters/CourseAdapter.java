@@ -1,21 +1,20 @@
 package com.dev.campusfrontute.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dev.campusfrontute.CourseActivity;
 import com.dev.campusfrontute.R;
 import com.dev.campusfrontute.models.MdlCourse;
-import com.dev.campusfrontute.network.RetrofitClient;
 
 import java.util.List;
 
@@ -41,10 +40,27 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         MdlCourse course = courseList.get(position);
 
+        // Get the views
+        LinearLayout linearLayout = holder.itemView.findViewById(R.id.llCourse);
+        TextView txtCourseName = holder.itemView.findViewById(R.id.txtCourseName);
+        TextView txtCourseShortName = holder.itemView.findViewById(R.id.txtCourseShortName);
+        TextView txtCourseStatus = holder.itemView.findViewById(R.id.txtCourseStatus);
+
+
         // Visual Elements
-        holder.txtCourseName.setText(course.getFullname());
-        holder.txtCourseDescription.setText(course.getShortname());
-        holder.txtCourseStatus.setText("Activado: " + course.getId());
+        txtCourseName.setText(course.getFullname());
+        txtCourseShortName.setText(course.getShortname());
+        txtCourseStatus.setText("Activado: " + course.getId());
+
+        // Intent for Course Detail
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CourseActivity.class);
+                intent.putExtra("courseId", course.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -53,15 +69,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     public static class CourseViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCourseName;
-        TextView txtCourseDescription;
-        TextView txtCourseStatus;
-
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtCourseName = itemView.findViewById(R.id.course_name);
-            txtCourseDescription = itemView.findViewById(R.id.course_shortname);
-            txtCourseStatus = itemView.findViewById(R.id.txtCourseStatus);
         }
     }
 }

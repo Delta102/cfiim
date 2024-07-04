@@ -9,22 +9,26 @@
     tools:context=".CourseActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="100dp"
+            android:paddingBottom="16dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:elevation="8dp"
-                app:cardCornerRadius="16dp"
                 app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +42,7 @@
 
                     <!-- Course Image -->
                     <ImageView
-                        android:id="@+id/imgCourseDetail"
+                        android:id="@+id/imgCourse"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop"
@@ -46,26 +50,26 @@
 
                     <!-- Course Name -->
                     <TextView
-                        android:id="@+id/txtCourseDetailName"
+                        android:id="@+id/txtCourseName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Nombre del Curso"
+                        android:gravity="center"
+                        android:text="Course Name"
                         android:textColor="@color/black"
                         android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
+                        android:textStyle="bold" />
 
                     <!-- Course Instructor -->
                     <TextView
-                        android:id="@+id/txtCourseInstructor"
+                        android:id="@+id/txtCourseShortName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Instructor: Nombre del Instructor"
+                        android:gravity="center"
+                        android:text="Cpirse Short Name"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:gravity="center" />
+                        android:textSize="16sp" />
 
                     <!-- Course Schedule -->
                     <TextView
@@ -79,53 +83,47 @@
                         android:textStyle="bold" />
 
                     <TableLayout
+                        android:id="@+id/tblCourseSchedule"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp">
 
                         <!-- Header Row -->
-                        <TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
+                                android:paddingEnd="18dp"
                                 android:text="Día"
-                                android:textStyle="bold"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
+                                android:paddingStart="16dp"
                                 android:text="Horario"
-                                android:textStyle="bold"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
                         </TableRow>
+                        <!-- Additional rows can be added dynamically as needed -->
 
-                        <!-- Sample Data Rows -->
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
-                                android:text="Lunes"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
-                                android:text="8:00 - 10:00 AM"
-                                android:textColor="@color/black" />
-                        </TableRow>
-                        <!-- Add more rows as needed -->
                     </TableLayout>
-
+                    <Button
+                        android:id="@+id/btnSeeMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Ver Más"
+                        android:visibility="gone" />
                     <!-- Contact Button -->
                     <Button
-                        android:id="@+id/btnContactTeacher"
+                        android:id="@+id/btnMarkingTeacher"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"

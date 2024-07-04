@@ -20,6 +20,7 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
+            android:id="@+id/llCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -42,7 +43,7 @@
 
                 <!-- Course Name -->
                 <TextView
-                    android:id="@+id/course_name"
+                    android:id="@+id/txtCourseName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -54,7 +55,7 @@
 
                 <!-- Course Short Name -->
                 <TextView
-                    android:id="@+id/course_shortname"
+                    android:id="@+id/txtCourseShortName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

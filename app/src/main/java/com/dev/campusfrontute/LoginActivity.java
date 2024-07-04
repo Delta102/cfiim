@@ -31,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText userNameTxt = findViewById(R.id.username);
-        EditText passwordTxt = findViewById(R.id.password);
+        EditText userNameTxt = findViewById(R.id.edTxtUsername);
+        EditText passwordTxt = findViewById(R.id.edTxtPassword);
         Button loginBtn = findViewById(R.id.login_button);
         // Event for Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
